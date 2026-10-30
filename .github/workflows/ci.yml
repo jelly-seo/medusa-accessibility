@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python3 tools/check.py
+      - run: python3 tools/package.py

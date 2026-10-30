@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Versions match the tag
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          grep -q "Version: $V" medusa-accessibility-tools/medusa-accessibility-tools.php
+          grep -q "define( 'MEDUSA_A11Y_VERSION', '$V' )" medusa-accessibility-tools/medusa-accessibility-tools.php
+          grep -q "Stable tag: $V" medusa-accessibility-tools/readme.txt
+      - run: python3 tools/package.py
+      - run: python3 tools/release_notes.py "$GITHUB_REF_NAME" > notes.md
+      - name: Publish the zip
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/medusa-accessibility-tools.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/medusa-accessibility-tools.zip --title "Medusa Accessibility Tools $GITHUB_REF_NAME" --notes-file notes.md
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
