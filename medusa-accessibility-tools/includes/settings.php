@@ -113,7 +113,6 @@ function medusa_a11y_page() {
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Accessibility Tools', 'medusa-accessibility-tools' ); ?></h1>
-		<p><?php esc_html_e( 'A floating button on every page opens the accessibility options: text size, a dyslexic font, inverted colours and colour blind modes. Visitors\' choices are remembered in their browser.', 'medusa-accessibility-tools' ); ?></p>
 		<form method="post" action="options.php">
 			<?php settings_fields( 'medusa_a11y' ); ?>
 			<table class="form-table" role="presentation">
@@ -122,7 +121,6 @@ function medusa_a11y_page() {
 					<td>
 						<?php medusa_a11y_select( 'colour', medusa_a11y_colours(), $o['colour'] ); ?>
 						<p class="medusa-a11y-custom"><input type="text" id="medusa-a11y-custom" name="medusa_a11y[custom]" value="<?php echo esc_attr( $o['custom'] ); ?>" class="medusa-a11y-picker" data-default-color="#111827"></p>
-						<p class="description"><?php esc_html_e( 'Theme colours use the site\'s palette where the theme provides one, such as any Medusa theme, and fall back to a near black, a blue or an orange. The icon switches between white and near black to stay readable.', 'medusa-accessibility-tools' ); ?></p>
 					</td>
 				</tr>
 				<tr>
