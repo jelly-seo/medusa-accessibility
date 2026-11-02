@@ -2,8 +2,8 @@
 /*
 Plugin Name: Medusa Accessibility Tools
 Plugin URI: https://jellyseo.com/accessibility
-Description: A floating accessibility button: larger text, a dyslexic friendly font, inverted colours and colour blind modes. Free from Jelly.
-Version: 1.0.0
+Description: A floating accessibility button: accessible mode, larger text, a dyslexic friendly font, inverted colours and colour blind modes. Free from Jelly.
+Version: 1.1.0
 Author: Jelly
 Author URI: https://jellyseo.com/
 Requires at least: 6.3
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MEDUSA_A11Y_VERSION', '1.0.0' );
+define( 'MEDUSA_A11Y_VERSION', '1.1.0' );
 define( 'MEDUSA_A11Y_FILE', __FILE__ );
 define( 'MEDUSA_A11Y_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MEDUSA_A11Y_URL', plugin_dir_url( __FILE__ ) );

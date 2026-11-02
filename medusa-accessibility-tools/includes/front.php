@@ -57,7 +57,7 @@ function medusa_a11y_early() {
 	if ( ! medusa_a11y_enabled() ) {
 		return;
 	}
-	wp_print_inline_script_tag( 'try{var s=JSON.parse(localStorage.getItem("medusaA11y")||"{}"),d=document.documentElement;if(s.text>0&&s.text<5)d.setAttribute("data-mat-text",s.text);if(s.font)d.setAttribute("data-mat-font","dyslexic");if(s.invert)d.setAttribute("data-mat-invert","");if(["protanopia","deuteranopia","tritanopia"].indexOf(s.cb)>-1)d.setAttribute("data-mat-cb",s.cb)}catch(e){}' );
+	wp_print_inline_script_tag( 'try{var s=JSON.parse(localStorage.getItem("medusaA11y")||"{}"),d=document.documentElement;if(s.text>0&&s.text<5)d.setAttribute("data-mat-text",s.text);if(s.font)d.setAttribute("data-mat-font","dyslexic");if(s.invert)d.setAttribute("data-mat-invert","");if(["protanopia","deuteranopia","tritanopia"].indexOf(s.cb)>-1)d.setAttribute("data-mat-cb",s.cb);if(s.reader)d.setAttribute("data-mat-reader","pending")}catch(e){}' );
 }
 add_action( 'wp_head', 'medusa_a11y_early', 1 );
 
@@ -67,12 +67,27 @@ function medusa_a11y_assets() {
 	}
 	wp_enqueue_style( 'medusa-a11y', MEDUSA_A11Y_URL . 'assets/css/widget.css', array(), MEDUSA_A11Y_VERSION );
 	wp_add_inline_style( 'medusa-a11y', medusa_a11y_button_vars() );
-	wp_enqueue_script( 'medusa-a11y', MEDUSA_A11Y_URL . 'assets/js/widget.js', array(), MEDUSA_A11Y_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+	wp_enqueue_script( 'medusa-a11y-reader', MEDUSA_A11Y_URL . 'assets/js/reader.js', array(), MEDUSA_A11Y_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+	wp_enqueue_script( 'medusa-a11y', MEDUSA_A11Y_URL . 'assets/js/widget.js', array( 'medusa-a11y-reader' ), MEDUSA_A11Y_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 	wp_localize_script(
-		'medusa-a11y',
+		'medusa-a11y-reader',
 		'MedusaA11y',
 		array(
-			'steps' => array( 100, 112.5, 125, 137.5, 150 ),
+			'steps'  => array( 100, 112.5, 125, 137.5, 150 ),
+			'site'   => wp_strip_all_tags( html_entity_decode( get_bloginfo( 'name' ), ENT_QUOTES, 'UTF-8' ) ),
+			'home'   => home_url( '/' ),
+			'labels' => array(
+				'skip'     => __( 'Skip to content', 'medusa-accessibility-tools' ),
+				'exit'     => __( 'Exit accessible mode', 'medusa-accessibility-tools' ),
+				'notice'   => __( 'You are using accessible mode, a simplified version of this page.', 'medusa-accessibility-tools' ),
+				'menu'     => __( 'Menu', 'medusa-accessibility-tools' ),
+				'contents' => __( 'On this page', 'medusa-accessibility-tools' ),
+				'footer'   => __( 'Site information', 'medusa-accessibility-tools' ),
+				'embed'    => __( 'Open embedded content', 'medusa-accessibility-tools' ),
+				'map'      => __( 'Open the map', 'medusa-accessibility-tools' ),
+				'video'    => __( 'Watch the video', 'medusa-accessibility-tools' ),
+				'newTab'   => __( '(opens in a new tab)', 'medusa-accessibility-tools' ),
+			),
 		)
 	);
 }
@@ -104,6 +119,10 @@ function medusa_a11y_widget() {
 		<div class="mat-head">
 			<h2 class="mat-title" id="mat-title"><?php esc_html_e( 'Accessibility Menu', 'medusa-accessibility-tools' ); ?></h2>
 			<button type="button" class="mat-close" id="mat-close" aria-label="<?php esc_attr_e( 'Close accessibility menu', 'medusa-accessibility-tools' ); ?>">&times;</button>
+		</div>
+		<div class="mat-row">
+			<span class="mat-label-wrap"><span class="mat-label" id="mat-reader-label"><?php esc_html_e( 'Accessible mode', 'medusa-accessibility-tools' ); ?></span><span class="mat-hint" id="mat-reader-hint"><?php esc_html_e( 'A simple version of each page for screen readers and easy navigation', 'medusa-accessibility-tools' ); ?></span></span>
+			<button type="button" class="mat-switch" data-mat-toggle="reader" role="switch" aria-checked="false" aria-labelledby="mat-reader-label" aria-describedby="mat-reader-hint"><span></span></button>
 		</div>
 		<div class="mat-row">
 			<span class="mat-label" id="mat-text-label"><?php esc_html_e( 'Text size', 'medusa-accessibility-tools' ); ?></span>

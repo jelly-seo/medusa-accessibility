@@ -4,16 +4,17 @@ Tags: accessibility, dyslexia, colour blind, text size, a11y
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A floating accessibility button: larger text, a dyslexic friendly font, inverted colours and colour blind modes. Free from Jelly.
+A floating accessibility button: accessible mode, larger text, a dyslexic friendly font, inverted colours and colour blind modes. Free from Jelly.
 
 == Description ==
 
 Medusa Accessibility Tools adds a round button to every page of your site. It opens the Accessibility Menu, where visitors can:
 
+* Switch to Accessible mode, a plain, easy to navigate version of each page for screen readers and keyboard users
 * Make text larger, from 100% to 150% in five steps
 * Switch to a dyslexic friendly font (OpenDyslexic, bundled with the plugin, nothing loaded from Google)
 * Invert colours, with photos and video kept as they are
@@ -23,6 +24,12 @@ Medusa Accessibility Tools adds a round button to every page of your site. It op
 Choices are remembered in the visitor's browser and applied before the page appears, so there's no flash as they move between pages. The menu works fully by keyboard and with screen readers.
 
 More about web accessibility: https://jellyseo.com/accessibility
+
+= Accessible mode =
+
+Accessible mode rebuilds the page the visitor is on as a simple document: a skip link, the site name, an exit button, the site menu, an "On this page" list for longer pages, then the content as headings, paragraphs, lists, tables, images with alt text and links, and finally the footer. Embedded videos and maps become clear links, FAQs open up, and forms are the site's real forms, so they still send. It stays on as visitors move around the site until they switch it off.
+
+It's built in the visitor's browser on top of the live page. The page has no separate URL and the server sends exactly the same HTML, so search engines never see it and it can't create duplicate content.
 
 == Installation ==
 
@@ -52,6 +59,11 @@ Yes. Return false from the medusa_a11y_show filter on the requests where it shou
 OpenDyslexic by Abbie Gonzalez, used under the SIL Open Font License 1.1 (assets/fonts/OFL.txt).
 
 == Changelog ==
+
+= 1.1.0 - 2026-11-02 =
+
+- Accessible mode: a plain, screen reader friendly version of each page with a skip link, site menu, on this page list, clean content, working forms and the footer, built on top of the live page with no separate URL so there's no duplicate content
+- Accessible mode stays on across pages until switched off, and has its own exit button
 
 = 1.0.0 - 2026-10-30 =
 

@@ -388,3 +388,302 @@ body.mdt-active .mat-bottom-left {
 		display: none;
 	}
 }
+
+html[data-mat-reader="pending"] body > *:not(#mat-widget):not(#wpadminbar):not(.mat-filters) {
+	opacity: 0;
+	animation: mat-reveal 0s 3s forwards;
+}
+@keyframes mat-reveal {
+	to {
+		opacity: 1;
+	}
+}
+html[data-mat-reader="on"] body > *:not(#mat-reader):not(#mat-widget):not(#wpadminbar):not(.mat-filters) {
+	display: none !important;
+}
+html[data-mat-reader="on"],
+html[data-mat-reader="on"] body {
+	background: #fff !important;
+}
+html[data-mat-reader="on"] body {
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: visible !important;
+}
+
+#mat-reader {
+	box-sizing: border-box;
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: 1rem 1.25rem 7rem;
+	background: #fff;
+	color: #111;
+	font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 1.25rem;
+	font-weight: 400;
+	line-height: 1.6;
+	letter-spacing: normal;
+	text-align: left;
+	text-transform: none;
+	overflow-wrap: break-word;
+}
+#mat-reader *,
+#mat-reader *::before,
+#mat-reader *::after {
+	box-sizing: border-box;
+}
+#mat-reader :where(h1, h2, h3, h4, h5, h6) {
+	margin: 2.25rem 0 0.75rem;
+	padding: 0;
+	color: #111;
+	font-family: inherit;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: normal;
+	text-transform: none;
+}
+#mat-reader h1 {
+	margin-top: 1.5rem;
+	font-size: 2.25rem;
+}
+#mat-reader h2 {
+	font-size: 1.75rem;
+}
+#mat-reader h3 {
+	font-size: 1.45rem;
+}
+#mat-reader :where(h4, h5, h6) {
+	font-size: 1.25rem;
+}
+#mat-reader :where(p, ul, ol, dl, blockquote, figure, table, pre, address, details, form, video) {
+	margin: 0 0 1.25rem;
+}
+#mat-reader :where(ul, ol) {
+	padding-left: 1.5rem;
+}
+#mat-reader li {
+	margin: 0 0 0.5rem;
+}
+#mat-reader a {
+	color: #1d4ed8;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+}
+#mat-reader a:visited {
+	color: #6b21a8;
+}
+#mat-reader a:hover {
+	color: #111;
+	text-decoration-thickness: 3px;
+}
+#mat-reader :focus-visible,
+#mat-reader [tabindex="-1"]:focus {
+	outline: 3px solid #111;
+	outline-offset: 2px;
+}
+#mat-reader a:focus-visible {
+	background: #ffdd00;
+	color: #111;
+	box-shadow: 0 4px 0 #111;
+	outline: none;
+	text-decoration: none;
+}
+#mat-reader [tabindex="-1"]:focus:not(:focus-visible) {
+	outline: none;
+}
+#mat-reader img,
+#mat-reader video {
+	display: block;
+	max-width: 100%;
+	max-height: 28rem;
+	width: auto;
+	height: auto;
+	margin: 0 0 1.25rem;
+	border-radius: 6px;
+}
+#mat-reader figure img {
+	margin-bottom: 0.5rem;
+}
+#mat-reader figcaption {
+	color: #444;
+	font-size: 1rem;
+}
+#mat-reader blockquote {
+	margin-left: 0;
+	padding-left: 1rem;
+	border-left: 4px solid #111;
+}
+#mat-reader table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 1.05rem;
+}
+#mat-reader :where(th, td) {
+	padding: 0.5rem;
+	border: 1px solid #888;
+	text-align: left;
+	vertical-align: top;
+}
+#mat-reader hr {
+	margin: 2rem 0;
+	border: 0;
+	border-top: 2px solid #ccc;
+}
+#mat-reader summary {
+	font-weight: 700;
+	cursor: pointer;
+}
+#mat-reader .mat-sr {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+#mat-reader .mat-reader-skip {
+	position: absolute;
+	left: 1rem;
+	top: -10rem;
+	z-index: 10;
+	padding: 0.75rem 1rem;
+	background: #ffdd00;
+	color: #111;
+}
+#mat-reader .mat-reader-skip:focus {
+	top: 1rem;
+}
+#mat-reader .mat-reader-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem 1rem;
+	padding: 0.5rem 0 1.25rem;
+	border-bottom: 3px solid #111;
+}
+#mat-reader .mat-reader-site {
+	margin: 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+#mat-reader .mat-reader-site a {
+	color: #111;
+}
+#mat-reader .mat-reader-exit {
+	margin: 0;
+	padding: 0.6rem 1.1rem;
+	border: 3px solid #111;
+	border-radius: 999px;
+	background: #fff;
+	color: #111;
+	font: inherit;
+	font-size: 1.05rem;
+	font-weight: 700;
+	line-height: 1.2;
+	cursor: pointer;
+}
+#mat-reader .mat-reader-exit:hover {
+	background: #111;
+	color: #fff;
+}
+#mat-reader .mat-reader-notice {
+	flex-basis: 100%;
+	margin: 0;
+	color: #444;
+	font-size: 1rem;
+}
+#mat-reader :where(.mat-reader-nav, .mat-reader-contents) {
+	margin: 1.5rem 0 0;
+	padding: 0 0 1.5rem;
+	border-bottom: 1px solid #ccc;
+}
+#mat-reader :where(.mat-reader-nav, .mat-reader-contents) h2 {
+	margin-top: 0;
+	font-size: 1.35rem;
+}
+#mat-reader :where(.mat-reader-nav, .mat-reader-contents) ul {
+	margin: 0 0 0.75rem;
+	padding-left: 0;
+	list-style: none;
+}
+#mat-reader :where(.mat-reader-nav, .mat-reader-contents) ul ul {
+	margin: 0.25rem 0 0;
+	padding-left: 1.25rem;
+	border-left: 3px solid #ddd;
+}
+#mat-reader :where(.mat-reader-nav, .mat-reader-contents) a {
+	display: inline-block;
+	padding: 0.35rem 0;
+}
+#mat-reader .mat-reader-contents {
+	margin: 0 0 2rem;
+	padding: 1rem 1.25rem;
+	border: 2px solid #ccc;
+	border-radius: 8px;
+}
+#mat-reader .mat-reader-footer {
+	margin-top: 3rem;
+	padding-top: 1.5rem;
+	border-top: 3px solid #111;
+	font-size: 1.05rem;
+}
+#mat-reader .mat-reader-footer img {
+	max-height: 5rem;
+	width: auto;
+}
+#mat-reader :where(label) {
+	display: block;
+	margin: 0 0 0.35rem;
+	font-weight: 700;
+}
+#mat-reader :where(input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]), select, textarea) {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 0 1rem;
+	padding: 0.75rem;
+	border: 2px solid #111;
+	border-radius: 6px;
+	background: #fff;
+	color: #111;
+	font: inherit;
+}
+#mat-reader :where(input[type="checkbox"], input[type="radio"]) {
+	width: 1.5rem;
+	height: 1.5rem;
+	margin-right: 0.5rem;
+	vertical-align: middle;
+}
+#mat-reader :where(button, input[type="submit"]):not(.mat-reader-exit) {
+	margin: 0.5rem 0 1rem;
+	padding: 0.75rem 1.5rem;
+	border: 3px solid #111;
+	border-radius: 999px;
+	background: #111;
+	color: #fff;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+#mat-reader :where(input, select, textarea, button):focus-visible {
+	outline: 3px solid #ffdd00;
+	outline-offset: 0;
+	box-shadow: 0 0 0 6px #111;
+}
+
+.mat-widget .mat-label-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+.mat-widget .mat-hint {
+	color: #5b6170;
+	font-size: 12.5px;
+	font-weight: 400;
+	line-height: 1.35;
+}

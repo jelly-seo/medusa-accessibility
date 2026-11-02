@@ -2,13 +2,16 @@
 
 A free WordPress plugin from [Jelly](https://jellyseo.com/accessibility) that adds a floating accessibility button to any site. It opens the Accessibility Menu, where visitors can:
 
+- Switch to Accessible mode: a plain version of the page built on top of the live page, with a skip link, the site menu, an on this page list, the content as clean headings, paragraphs, lists, tables and images with alt text, working forms and the footer
 - Make text larger, from 100% to 150% in five steps
 - Switch to a dyslexic friendly font (OpenDyslexic, bundled, nothing loaded from Google)
 - Invert colours, with photos and video kept as they are
 - Turn on a colour blind mode for protanopia, deuteranopia or tritanopia
 - Reset everything
 
-Choices are remembered in the visitor's browser and applied before the page appears. The menu works by keyboard and with screen readers, and links to [jellyseo.com/accessibility](https://jellyseo.com/accessibility).
+Choices are remembered in the visitor's browser and applied before the page appears.
+
+Accessible mode never changes what the server sends. It has no URL or query string of its own, so search engines only ever see the normal page and there's no duplicate content. In the browser it reads the live page, hides the original while it's on, and moves real forms into it so they still work, then puts everything back when it's switched off. The menu works by keyboard and with screen readers, and links to [jellyseo.com/accessibility](https://jellyseo.com/accessibility).
 
 ## Download
 

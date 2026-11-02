@@ -35,6 +35,7 @@
 		var switches = widget.querySelectorAll('[data-mat-toggle]');
 		var sizes = (window.MedusaA11y && window.MedusaA11y.steps) || [100, 112.5, 125, 137.5, 150];
 		var state = read();
+		var reader = window.MedusaA11yReader || null;
 
 		function clean() {
 			var text = parseInt(state.text, 10);
@@ -42,6 +43,7 @@
 			state.font = !!state.font;
 			state.invert = !!state.invert;
 			state.cb = MODES.indexOf(state.cb) > -1 ? state.cb : '';
+			state.reader = !!state.reader;
 		}
 
 		function attr(name, on, val) {
@@ -52,8 +54,15 @@
 			}
 		}
 
-		function apply() {
+		function apply(focus) {
 			clean();
+			if (reader) {
+				if (state.reader && !reader.active()) {
+					reader.on(focus);
+				} else if (!state.reader && reader.active()) {
+					reader.off();
+				}
+			}
 			attr('data-mat-text', state.text > 0, String(state.text));
 			attr('data-mat-font', state.font, 'dyslexic');
 			attr('data-mat-invert', state.invert);
@@ -67,8 +76,8 @@
 			select.value = state.cb;
 		}
 
-		function change() {
-			apply();
+		function change(focus) {
+			apply(focus);
 			var saved = {};
 			if (state.text) {
 				saved.text = state.text;
@@ -81,6 +90,9 @@
 			}
 			if (state.cb) {
 				saved.cb = state.cb;
+			}
+			if (state.reader) {
+				saved.reader = true;
 			}
 			write(saved);
 		}
@@ -130,7 +142,13 @@
 			button.addEventListener('click', function () {
 				var key = button.getAttribute('data-mat-toggle');
 				state[key] = !state[key];
-				change();
+				if (key === 'reader') {
+					shut(false);
+				}
+				change(key === 'reader' && state.reader);
+				if (key === 'reader' && !state.reader) {
+					toggle.focus();
+				}
 			});
 		});
 		select.addEventListener('change', function () {
@@ -142,7 +160,18 @@
 			change();
 		});
 
-		apply();
+		if (reader) {
+			reader.onExit = function () {
+				state.reader = false;
+				change();
+				window.scrollTo(0, 0);
+				if (toggle.offsetParent) {
+					toggle.focus();
+				}
+			};
+		}
+
+		apply(false);
 	}
 
 	if (document.readyState === 'loading') {

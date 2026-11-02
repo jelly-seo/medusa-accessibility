@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 - 2026-11-02
+
+- Accessible mode: a plain, screen reader friendly version of each page with a skip link, site menu, on this page list, clean content, working forms and the footer, built on top of the live page with no separate URL so there's no duplicate content
+- Accessible mode stays on across pages until switched off, and has its own exit button
+
 ## 1.0.0 - 2026-10-30
 
 - First public release
